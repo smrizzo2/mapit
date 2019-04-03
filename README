@@ -1,0 +1,49 @@
+MAP IT v1.0
+
+REQUIREMENTS
+------------
+
+1. A web server that can serve PHP pages.  Any reasonably modern version of PHP should be acceptable.  If your Sierra
+website is served with https://, then this PHP web server must also be able to serve pages over https://.  Most
+modern browsers will NOT load non-SSL objects (images, etc) from a page which was served over SSL.
+
+2. Administrative access to Sierra.
+
+OVERVIEW
+--------
+STEP 1:  The Sierra administrator needs to add some extra HTML code via the Sierra Desktop App.
+STEP 2:  The PHP pages need to be un-tar/zip'd to a PHP web server.
+STEP 3:  The PHP pages need to be modified to reflect your library's Location codes (note: there is a display
+		value such as "Main" or "Juvenile Collection", and then there is an associated code like "main" or "juv".
+		We only care about the codes.
+STEP 4:  Create your own graphic/map files for your stacks. They should be .png files of a reasonable size.  A width of 800px
+		is adequate.
+
+DETAILS
+-------
+STEP 1:	Go into the Sierra Desktop App. Under ADMINISTRATION, select Web Master from the pull-down menu on the right.
+
+STEP 2: Select either "Staging Web Server Screens" or "Live Web Server Screens". 
+	You can access your staging catalog by adding port 2082 (http) to your catalog URL (ex- http://sierra.monmouth.edu:2082/search)
+
+STEP 3: Select the bib_display.html file and then select edit (top right).
+
+STEP 4: Place the HTML code from mapit_bib_display.html between bibDisplayContentMain and bibDisplayContentMore.
+
+STEP 5: Edit the URLs in the HTML code in STEP 4 to match the URL/hostname of your PHP server, your catalog, and the location of your "Map It" button.
+
+STEP 6: Edit the sierra_maps_db.php file to reflect your locations and call numbers on each shelf.
+
+STEP 7: Edit the index.php (read the comments in the file).  Notably, you'll need to modify the switch() statement at the
+	end to reflect your location codes and use the appropriate method to convert a call # to a stack #.
+
+SPECIAL THANKS
+--------------
+To The University of Texas at Arlington for writing the function for comparing Library of Congress call numbers.  We use this to
+determine if a particular call number falls before another (ie. the end of a shelf).
+
+To Alex Vancina of Helen Plum Library for help extracting location & call number from WebPAC XML records.
+
+This work is licensed under a Creative Commons Attribution-NonCommercial License.
+
+

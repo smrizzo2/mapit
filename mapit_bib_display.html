@@ -1,0 +1,46 @@
+//In Sierra, this gets inserted into bib_display.html between bibDisplayContentMain and bibDisplayContentMore
+
+<img id="toggle" onclick="toggler()" src="https://library.monmouth.edu/stack_maps/MapIt.gif" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script type="text/javascript">
+		/* This function controls show/hide toggling on the div that contains the map image that gets loaded when the MapIt button is clicked. */
+		function toggler() {
+			var x = document.getElementById("tog");
+			if (x.style.display === "none") {
+ 				x.style.display = "block";
+  			 } else {
+   				x.style.display = "none";
+			    }
+		}
+    		
+		/* this function assembles the path the catalog and xml and uses that full path as a URL parameter in a sub-function (below) */
+		$(document).ready(function() {
+		
+			var catalogUrl = "https://sierra.monmouth.edu";
+			
+			
+			var recordPath = $("#recordnum").attr('href');
+			
+			
+			var xmlPath = '/x' + recordPath.substring(1, recordPath.length);
+			
+				var fullPath = catalogUrl + xmlPath;
+			
+			/* This sub-function gets the item location and call number from the item's xml. It then uses that data to make a request for the appropriate stack map image and stores its path in the stackMapImg variable. Data in the stackMapImg variable is used to create the 'img' and 'a href' HTML attributes in the toggled div. */
+			$.ajax({
+				type: "GET",
+				url: fullPath,
+				dataType: "xml",
+				success: function(xml){
+					itemLocation = $(xml).find('FIXLABEL:contains("LOCATION") ~ FIXVALUE').text();
+					itemCallNum = $(xml).find('TAG:contains("CALL #")').parent().siblings().find('MARCSUBFLD >  SUBFIELDDATA').text();
+					
+					var stackMapImg = "https://library.monmouth.edu/stack_maps/index.php?location=" + itemLocation.trim() + "&call=" + itemCallNum;
+					$('#stack-map').attr('src', stackMapImg);
+					$('#stack-maplink').attr('href', stackMapImg);
+					//the below line is a test to see if it is pulling the location & call number correctly
+					//alert("XML Path: " + catalogUrl + xmlPath + "\nLocation: " + itemLocation.trim() + "\nCall: " + itemCallNum);
+				}
+			});
+		});
+	</script><div id="tog" style="display:none"><a id="stack-maplink" href="" target="_blank"><img id="stack-map" src="" width=800 /></a></div><br clear="all" /><br />
