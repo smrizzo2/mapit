@@ -1,4 +1,5 @@
 MAP IT v1.0
+Developed at Monmouth University by Rob Carsey, Janine Frederick, Sara Margaret Rizzo, Allison Shields, and Jing Zhou
 
 REQUIREMENTS
 ------------
@@ -24,7 +25,7 @@ DETAILS
 STEP 1:	Go into the Sierra Desktop App. Under ADMINISTRATION, select Web Master from the pull-down menu on the right.
 
 STEP 2: Select either "Staging Web Server Screens" or "Live Web Server Screens". 
-	You can access your staging catalog by adding port 2082 (http) to your catalog URL (ex- http://sierra.monmouth.edu:2082/search)
+	You can access your staging catalog by adding port 2082 (http) or 444 (https) to your catalog URL (ex- http://sierra.monmouth.edu:2082/search)
 
 STEP 3: Select the bib_display.html file and then select edit (top right).
 
